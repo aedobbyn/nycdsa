@@ -136,6 +136,53 @@ check_equal <- function(obj) {
 }
 
 
+check_equal <- function(obj) {
+  len <- length(obj)
+  if (len %% 2 == 0) {
+    lefts <- 1:(len/2)
+    rights <- len:(max(lefts) + 1)    
+  } else {
+    lefts <- floor(1:(len/2))
+    rights <- len:(max(lefts) + 2)
+  }
+
+  if (all(obj[lefts] == obj[rights])) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+
+foo <- c("1", "2", "3,", "2", "1")   # TRUE
+bar <- c("1", "2", "3", "3", "2", "1")  # TRUE
+baz <- c("4", "5", "6,", "7", "8")   # FALSE
+
+
+find_palindromes_safe <- function(start = 999, end = 100) {
+  a <- start
+  b <- start
+  for (i in start:end) {
+    product <- a*b
+    
+    # Take product to character and split into a vector of its digits
+    product_str_split <- product %>% as.character() %>% strsplit("") %>% unlist()
+    
+    res <- check_equal(product_str_split)
+    if (res == TRUE) {
+      return(product)
+    } else {
+      if (i %% 2 == 0) {
+        a <- a - 1
+      } else {
+        b <- b - 1
+      }
+    }
+  }
+}
+
+find_palindromes_safe()
+
 
 
 

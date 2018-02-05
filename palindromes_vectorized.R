@@ -75,7 +75,7 @@ find_palindromes <- function(start = 999, end = 100) {
       palindrome = mult_as_str %>% check_equal()
     ) %>% 
     filter(palindrome == TRUE) %>% 
-    slice(1:1)
+    filter(mult == max(mult))
   
   return(out)
 }

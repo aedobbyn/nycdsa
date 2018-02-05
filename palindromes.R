@@ -1,9 +1,8 @@
-# Find the largest palindrome made from the product of two 3-digit numbers.
+### Find the largest palindrome made from the product of two 3-digit numbers. ###
 
 library(tidyverse)
-# For both solutions I assume the multipliers should be positive whole numbers
 
-# -------------- Simpler Solution --------
+# --------------- Simpler Solution ------------
 # We assume that numbers must be whole and that our palindrome will be 6 digits long
 
 find_palindromes_simple <- function(a = 999, b = 999) {
@@ -36,6 +35,7 @@ find_palindromes_simple()
 # We do not assume that our palindrome is 6 digits and we also don't assume 
 # that numbers are whole or positive
 
+# Helper function to be used in find_palindromes_safe()
 check_equal <- function(obj) {
   len <- length(obj)
   if (len %% 2 == 0) {    
@@ -53,7 +53,7 @@ check_equal <- function(obj) {
   }
 }
 
-# Test
+# Test check_equal()
 foo <- c("1", "2", "3,", "2", "1")      # check_equal(foo) yields TRUE
 bar <- c("1", "2", "3", "3", "2", "1")  # check_equal(bar) yields TRUE
 baz <- c("4", "5", "6,", "7", "8")      # check_equal(baz) yields FALSE

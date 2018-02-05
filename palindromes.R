@@ -33,7 +33,8 @@ find_palindromes_simple()
 
 
 # ------------------- Safer soltuion ------------------
-# We do not assume that our palindrome is 6 digits
+# We do not assume that our palindrome is 6 digits and we also don't assume 
+# that numbers are whole
 
 check_equal <- function(obj) {
   len <- length(obj)
@@ -58,21 +59,28 @@ bar <- c("1", "2", "3", "3", "2", "1")  # check_equal(bar) yields TRUE
 baz <- c("4", "5", "6,", "7", "8")      # check_equal(baz) yields FALSE
 
 
-find_palindromes_safe <- function(start = 999, end = 100) {
+find_palindromes_safe <- function(start = 999, end = 100, decrement = 1) {
   a <- start
   b <- start
-  for (i in start:end) {
+  tries <- seq(end, start, by = decrement)
+  for (i in tries) {
     product <- a*b
     
-    product_str_split <- product %>% as.character() %>% strsplit("") %>% unlist()
+    product_str_split <- product %>% as.character() %>% 
+      stringr::str_extract_all('[0-9]', simplify = TRUE) %>%  # Remove decimals if they exist
+      stringr::str_split("") %>% purrr::as_vector()
     
     if (check_equal(product_str_split) == TRUE) {
       return(product)
     } else {
-      if (i %% 2 == 0) {
-        a <- a - 1
+      if (a > end & b > end) {
+        if (i %% 2 == 0) {
+          a <- a - decrement
+        } else {
+          b <- b - decrement
+        }
       } else {
-        b <- b - 1
+        message("No palindromes in this range.")
       }
     }
   }
@@ -81,7 +89,7 @@ find_palindromes_safe <- function(start = 999, end = 100) {
 find_palindromes_safe()
 # 698896
 
-
-
+find_palindromes_safe(3.14, 2.72, decrement = 0.001)
+# No palindromes in this range.
 
 

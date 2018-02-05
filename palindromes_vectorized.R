@@ -81,7 +81,6 @@ find_palindromes <- function(start = 999, end = 100, batch_percent = 0.001) {
   return(palindromes)
 }
 
-find_palindromes()
 
 sol <- find_palindromes()
 # Testing up to row 1620
@@ -96,4 +95,6 @@ sol %>% pluck("mult")
 find_palindromes(1.23, 4.56)
 # No palindromes in this range.
 
+find_palindromes(-789, -246)
+# 571175
 

@@ -34,7 +34,7 @@ find_palindromes_simple()
 
 # ------------------- Safer soltuion ------------------
 # We do not assume that our palindrome is 6 digits and we also don't assume 
-# that numbers are whole
+# that numbers are whole or positive
 
 check_equal <- function(obj) {
   len <- length(obj)
@@ -59,25 +59,36 @@ bar <- c("1", "2", "3", "3", "2", "1")  # check_equal(bar) yields TRUE
 baz <- c("4", "5", "6,", "7", "8")      # check_equal(baz) yields FALSE
 
 
-find_palindromes_safe <- function(start = 999, end = 100, decrement = 1) {
+find_palindromes_safe <- function(start = 999, end = 100, by = 1) {
   a <- start
   b <- start
-  tries <- seq(end, start, by = decrement)
+  if (start > end) {
+    tries <- seq(end, start, by = by)
+  } else {   # If start and end are negative
+    tries <- seq(start, end, by = by)
+  }
+  
   for (i in tries) {
     product <- a*b
     
     product_str_split <- product %>% as.character() %>% 
-      stringr::str_extract_all('[0-9]', simplify = TRUE) %>%  # Remove decimals if they exist
+      stringr::str_extract_all('[0-9]', simplify = TRUE) %>%  # Remove decimals and negative signs if they exist
       stringr::str_split("") %>% purrr::as_vector()
     
     if (check_equal(product_str_split) == TRUE) {
       return(product)
     } else {
-      if (a > end & b > end) {
+      if (start > end & a > end & b > end) {
         if (i %% 2 == 0) {
-          a <- a - decrement
+          a <- a - by
         } else {
-          b <- b - decrement
+          b <- b - by
+        }
+      } else if (a < end & b < end) {  # Start and end are negative
+        if (i %% 2 == 0) {
+          a <- a + by
+        } else {
+          b <- b + by
         }
       } else {
         message("No palindromes in this range.")
@@ -89,7 +100,10 @@ find_palindromes_safe <- function(start = 999, end = 100, decrement = 1) {
 find_palindromes_safe()
 # 698896
 
-find_palindromes_safe(3.14, 2.72, decrement = 0.001)
+find_palindromes_safe(-999, -100, by = 1)
+# 698896
+
+find_palindromes_safe(3.14, 2.72, by = 0.001)
 # No palindromes in this range.
 
 

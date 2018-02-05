@@ -87,13 +87,14 @@ find_palindromes <- function(start = 999, end = 100, batch_percent = 0.005) {
     ) %>% 
     arrange(desc(mult))
   
+  # Define the beginning and end of our batches
   n_per_batch <- (nrow(mult_df)*batch_percent) %>% floor()
   batch_start <- 1
   batch_end <- n_per_batch
-  mult_df_batch_trues <- tibble()
+  palindromes <- tibble()
     
-  while (nrow(mult_df_batch_trues) == 0) {
-    mult_df_batch_trues <- mult_df %>%
+  while (nrow(palindromes) == 0) {
+    palindromes <- mult_df %>%
       slice(batch_start:batch_end) %>% 
       rowwise() %>%
       mutate(
@@ -101,19 +102,20 @@ find_palindromes <- function(start = 999, end = 100, batch_percent = 0.005) {
         palindrome = mult_as_str %>% check_equal()
       ) %>% 
       filter(palindrome == TRUE) %>% 
-      filter(mult == max(mult))
+      filter(mult == max(mult)) %>% 
+      slice(1:1)
     
+    # Re-up our batches if we couldn't find any palindromes
     batch_start <- batch_end
     batch_end <- batch_end + n_per_batch
-      
   }
   
-  return(mult_df_batch_trues)
+  return(palindromes)
 }
 
 find_palindromes()
 
 sol <- find_palindromes()
-sol %>% pluck()
+sol %>% pluck("mult")
 
 

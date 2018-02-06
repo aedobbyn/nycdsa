@@ -1,6 +1,5 @@
 library(tidyverse)
 
-
 # Helper to turn a number into its individual digits
 stringify <- function(e) {
   e <- e %>% as.character() %>% 
@@ -13,7 +12,7 @@ stringify(123)
 # "1" "2" "3"
 
 
-# Helper to check if 
+# Helper to check if the left side of our object is equal to the right side.
 check_equal <- function(obj) {
   len <- length(obj)
   if (len %% 2 == 0) {    
@@ -37,21 +36,21 @@ check_equal <- function(obj) {
 
 # Find palindromes by specifying a start and end numbers to multiply and percent of the multiples to be tested 
 # This is done in order to take advantage of fast apply-based functions in the mutate. We can't tell these to `break` 
-# once they hit upon an answer, so we'll check in small batches whether they have
+# once they hit upon an answer, so we'll check in small batches whether they have or not.
 find_palindromes <- function(start = 999, end = 100, batch_percent = 0.001) {
   a <- start:end
   b <- start:end
   
-  # Expand one and two into all their possible combinations
+  # Expand a and b into all their possible combinations
   mult_df <- expand.grid(a, b) %>% 
     as_tibble() %>% 
     mutate(
       mult = Var1 * Var2
     ) %>% 
-    arrange(desc(mult))
+    arrange(desc(mult))   # Start with the largest possible values
   
   # Define the beginning and end of our batches
-  n_per_batch <- (nrow(mult_df)*batch_percent) %>% ceiling()   # ceiling() takes care of the case where our n_per_batch might be 0
+  n_per_batch <- (nrow(mult_df)*batch_percent) %>% ceiling()   # ceiling() takes care of the case where our n_per_batch round down to 0
   batch_start <- 1
   batch_end <- n_per_batch
   palindromes <- tibble()
@@ -61,7 +60,7 @@ find_palindromes <- function(start = 999, end = 100, batch_percent = 0.001) {
       slice(batch_start:batch_end) %>% 
       rowwise() %>%
       mutate(
-        mult_as_str = mult %>% stringify() %>% list(),
+        mult_as_str = mult %>% stringify() %>% list(),    # Create nested list-column here
         palindrome = mult_as_str %>% check_equal()
       ) %>% 
       filter(palindrome == TRUE) %>% 

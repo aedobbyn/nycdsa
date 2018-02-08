@@ -1,0 +1,32 @@
+NYCDSA app questions
+
+Tell us why you are interested in the program and why you think you are qualified.
+    A graduate of the University of Chicago with a Bachelor's in psychology, I went on to work in a cognitive neuroscience lab doing statistical analyses on the experimental data we collected. I built upon my experimental design and stats background here before moving to work for a tech startup. I began doing part project management and part data science before proving that I should be moved into a full-time data science role. My boss and the company made that decision because I proved that I have not just a strong work ethic in the office, but also a thirst to learn outside of it.
+
+    Not only had I supplemented what I'd learned in school with online data science courses, I also spent a significant amount of time learning new data science techniques by putting them into practice on real data. I'm fortunate that my latest project, which I named Beer-in-Hand Data Science, gained some traction on Twitter and was recently reblogged on Data Skeptic. In large part because of the visibility it gave me, I received a scholarship to attend rstudio::conf, an important R conference hosted by the company that makes the RStudio IDE, as well as a membership in the NASA Datanauts 2018 class.
+
+    I originally proved my value in the data science space at work by coalescing and analyzing some of our internal metrics. My company, Earlybird, is a software services company that builds web and mobile apps for various clients. We go about tracking resource production in the typical way that agile software companies do: on a project management tool. Traditionally, our project managers had exported CSVs of "points" done for each project and calculated billing metrics in Excel. I revamped our system by plugging into the Trello API and writing a series of scripts to pull in data from our relative "boards," join it on our hours tracking data, and automate the exports of the resulting output.
+
+    Since I've transitioned to full-time data science, my job has primarily consisted of analyzing data from the core apps that the prod team builds and presenting the resulting RMarkdown reports to our clients. Other times, my role is more of a data cleaning than role at the beginning of a project; transforming, deduping, and general munging of clients' data before it's transferred from, e.g., a pile of spreadsheets into a database.
+
+    As someone who works full-time in the data science space, I have a good idea of where my blind spots are and how I would apply the knowledge I can gain from a program like NYCDSA in a work setting.
+
+
+If accepted, what do you hope to achieve from the program?
+
+    I'm primarily interested in completing this program because I hope it will provide me with both improved Python programming skills and more of the theoretical background behind some of the data science techniques I already use.
+
+    I'd also of course like to end the program with a full-time data science role that will challenge me at a company in NYC.
+
+    I'm the type to see things to completion, especially in a field that's of interest to me. After working in this space for a few years I'm convinced it's what I want to spend the rest of my career doing. To that end, I want to educate myself as much as possible while I'm at the beginning of my career in order to see the highest dividends in my productivity over the course of the rest of it.
+
+
+Explain your Data Analytical experience
+
+    My experience has been almost entirely in R, though I have completed the DataCamp Beginner and Intermediate Python for Data Science tracks and translated a short menu-building program from R into Python. In R, I prefer to stick to tidy data principles and use tidyverse packages when possible. I have some basic experience with non-standard evaluation (i.e. quosures).
+
+    I have experience building linear and logistic regression models, including mixed effects models. The only unsupervised learning technique I've used in practice is k-means. I've also used two different R packages to build random forest models for both classification and regression tasks. I've done some basic bag-of-words NLP on text data, calculating metrics like TF-IDF and pairwise correlations between n-grams. I also have some experience with web scraping.
+
+    When it comes to visualization, I'm comfortable in ggplot2. I've built network graphs and constructed functions for programmatically generating graphs. I have some basic experience using plotly for interactive visualizations. I've also built a few small Shiny apps (e.g. https://amandadobbyn.shinyapps.io/clusterfun/), though this is an area I'd like to improve in. The full writeup for this beer analysis project can be found at https://github.com/aedobbyn/beer-data-science/blob/master/compile/compile.md and the slides for the presentation at https://aedobbyn.github.io/beer-data-science/#/.
+
+    My most recent side project is a menu building and solving project. The unfinished writeup can be found https://github.com/aedobbyn/menu-builder/blob/master/compile/writeup.md. I use USDA data to build up random menus and "solve" them with a linear programming solver in order to change their portion sizes such that they are compliant with USDA guidelines on a variety of nutritional constraints. The project also involves some simulations, web scraping of Allrecipes.com, and a little bit of NLP using the tidytext package.
